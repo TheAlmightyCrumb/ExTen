@@ -1,8 +1,8 @@
 import com.paulhammant.ngwebdriver.ByAngular;
 import com.paulhammant.ngwebdriver.NgWebDriver;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.WindowType;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -21,8 +21,8 @@ public class Main {
 
     @BeforeClass
     public static void initialise() {
-        System.setProperty("webdriver.chrome.driver", "/Users/batman/Downloads/chromedriver");
-        driver = new ChromeDriver();
+//        System.setProperty("webdriver.chrome.driver", "/Users/batman/Downloads/chromedriver");
+        driver = DriverSingleton.getInstance();
         driver.manage().window().maximize();
     }
 
@@ -94,6 +94,21 @@ public class Main {
         calcClicks.add(Constants.FOUR_BUTTON_CSS_LOCATOR);
         int clicksResult = page.calculate(calcClicks);
         Assert.assertEquals(clicksResult, myResult);
+    }
+
+    /* Ex. 5 */
+    @Test
+    public void tabsTest() {
+        driver.get("https://www.google.com/");
+        String googleTab = driver.getWindowHandle();
+        driver.switchTo().newWindow(WindowType.TAB);
+        driver.get("https://www.youtube.com/");
+        String youtubeTab = driver.getWindowHandle();
+        driver.switchTo().newWindow(WindowType.TAB);
+        driver.get("https://translate.google.com/");
+        String translateTab = driver.getWindowHandle();
+        driver.switchTo().window(googleTab);
+        driver.switchTo().window(youtubeTab);
     }
 
     @AfterClass
