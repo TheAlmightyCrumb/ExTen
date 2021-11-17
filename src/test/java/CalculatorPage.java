@@ -7,9 +7,9 @@ import java.util.ArrayList;
 
 public class CalculatorPage {
     private WebDriver driver;
-
-    public CalculatorPage(WebDriver driver) {
-        this.driver = driver;
+    
+    public CalculatorPage() {
+        driver = DriverSingleton.getInstance();
     }
 
     public static String getPageUrl() {

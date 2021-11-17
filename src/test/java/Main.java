@@ -76,7 +76,7 @@ public class Main {
     @Test
     public void efficiencyTechniquesTest() {
         driver.get(CalculatorPage.getPageUrl());
-        CalculatorPage page = new CalculatorPage(driver);
+        CalculatorPage page = new CalculatorPage();
         String sevenBtnDimensions = page.getElementDimensions(Constants.SEVEN_BUTTON_CSS_LOCATOR);
         System.out.println("Button '7' dimensions: " + sevenBtnDimensions);
 
